@@ -7,7 +7,6 @@ book:
   date: "10/15/2023"
   chapters:
     - index.qmd
-    - quarto.qmd
     - intro.qmd
     - summary.qmd
     - references.qmd

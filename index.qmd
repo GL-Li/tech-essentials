@@ -1,5 +1,18 @@
 # Preface {.unnumbered}
 
-This project is written in Quarto. So in the first chapter, we learn how to effectively using Quarto.
+## Quarto essentials
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+This project is written in Quarto. So we need some Quarto basics to get started..
+
+### Create a Quarto project
+
+To create a quarto project from an exsisting directory, run from terminal `$ quarto create project`, use arrow to select the type of the project, and then set the directory to current directory `./`.
+
+After creating the quator project, we can set the title and author of the project in `_qarto.yml` file. Chapters are also arranged in this file.
+
+A quarto project must have an `index.qmd` file, which does not show up as a chapter in a book project. It is often used as preface.
+
+### Work with a quarto project
+
+-   **Preview in web browser** with `$ quarto preview`.
+-   **Render for publication** with `$ quarto render`
