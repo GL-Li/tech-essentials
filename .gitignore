@@ -4,4 +4,6 @@
 /.cache/
 /_book/
 /.ssh/
-/.lesshst/
+.lesshst
+.bash_history
+.sh_history
