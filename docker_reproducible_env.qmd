@@ -1,15 +1,17 @@
 ---
-title: "Docker for reproducible work"
+title: "Set up a RStudio Server Docker container"
 editor: visual
 ---
 
-Among the many applications of Docker containers, data science team benefit from the reproducible environment created by a docker image. For example, if all members in the team use the same R programming docker image, they are using the same version of R and R packages. This setting eliminates the "but it works on my computer ..." issues. This document details how to create such a R docker image, how to start a docker container from the image, and how to structure projects for conveniently use the docker container. Instead of a minimal example, we will create a fully functional docker image that can be applied to daily R projects.
+Data science team can take advantages of Docker containers to create an reproducible environment for all team members. For example, many data science teams use R and Rstudio in their development and analysis. Such a team can share a Rstudio Server Docker image and each team member can then create a docker container for their own work. In this case, all members in the team use the same version of R and R packages, which effectively reduces issues like "..., but it works on my computer".
+
+This document details how to create such a R docker image, how to start a docker container from the image, and how to structure projects to conveniently use the docker container. Instead of a minimal example, we will create a fully functional docker image that can be applied to daily R projects. Basic knowledge of Docker is required to understand this document.
 
 ## Creating a RStudio docker image
 
 ### Dockerfile
 
-I use base image `rocker/geospatial`, which includes RStudio Server IDE, tidyverse packages, and geospatial packages. It takes about 4G in disc space. You can choose other base images for your own needs. Here are a list of base images created by [the Rocker Team](https://hub.docker.com/u/rocker).
+I use base image `rocker/geospatial`, which includes RStudio Server IDE, tidyverse packages, and geospatial packages and dependencies. This base image takes about 4G in disc space. You can choose other base images for your own needs. Here are a list of base images created by [the Rocker Team](https://hub.docker.com/u/rocker).
 
 ``` dockerfile
 FROM rocker/geospatial:4.3.1
@@ -28,16 +30,16 @@ RUN Rscript -e "update.packages(ask = FALSE)"
 RUN mkdir /home/rstudio/.ssh
 
 # install my favirate font for RStudio
-COPY ./ubuntu-fonts/UbuntuMono-Regular.ttf ./
+COPY ./ubuntu-fonts/UbuntuMono-Regular.ttf .
 RUN install -m644 UbuntuMono-Regular.ttf /etc/rstudio/fonts/
-RUN rm UbuntuMono-Regular.ttf
+RUN rm UbuntuMono-Regular.ttf install_packages_1.R install_packages_2.R
 
 EXPOSE 8787
 ```
 
 ### Additional packages
 
-Additional packages are saved in files `install_packages_1.R` and `install_packages_2.R`. Try to use multiple files so that when new packages are added, we do not need to restall all packages. An example of such file is:
+Additional packages are saved in files `install_packages_1.R` and `install_packages_2.R`. Try to split all R packages into multiple files so that when new packages are added, we do not need to restall all packages. An example of such file is:
 
 ``` r
 devtools::install_github("GL-Li/totalcensus")
@@ -48,13 +50,13 @@ install.packages("tidycensus")
 
 ### ssh keys
 
-This may not be a good idea, but I like to be able to use `git` commands in RStudio Server's terminal. For this purpose, the directory `/home/rstudio/.ssh/` is created. Remember never copy your `.ssh` keys to the docker image. They are only copied when starting the docker container.
+This may not be a good idea, but I like to be able to use `git` commands in RStudio Server's terminal and work with Github. For this purpose, the directory `/home/rstudio/.ssh/` is created. Remember never copy your `.ssh` keys to the docker image. They are only copied when the docker container is started.
 
 We also need to mount host's `$HOME/.gitconfig` to container's `/etc/gitconfig` when starting a container.
 
 ### Favirate fonts
 
-My favirate font is [UbuntuMono-Regular](https://fonts.google.com/specimen/Ubuntu+Mono). Download the `.ttf` file and install it to `/etc/rstudio/fonts/`. It can be selected from the global settings in RStudio Server.
+My favirate font is [UbuntuMono-Regular](https://fonts.google.com/specimen/Ubuntu+Mono). Download the `.ttf` file and install it to `/etc/rstudio/fonts/`. It then can be selected from the global settings in RStudio Server.
 
 ### Building image and push to Dockerhub.
 
@@ -71,7 +73,7 @@ Rename `lglforfun/rstudio_dev` to your own Dockerhub account and image name. And
 We want to acheive the following when starting a RStudio docker container:
 
 -   The current directory is copied to the container's working directory, which is `/home/rstudio/`.
--   Copy the `.ssh` keys to container's `/home/rstudio/.ssh` so we can use git command at the container's terminal.
+-   Copy the `.ssh` keys to container's `/home/rstudio/.ssh` and `.gitconfig` to containers `/etc/gitconfig` so we can use git command at the container's terminal.
 
 We have all these in file `docker_rstudio`, which is a bash script:
 
