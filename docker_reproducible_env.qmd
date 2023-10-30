@@ -54,9 +54,9 @@ This may not be a good idea, but I like to be able to use `git` commands in RStu
 
 We also need to mount host's `$HOME/.gitconfig` to container's `/etc/gitconfig` when starting a container.
 
-### Favirate fonts
+### Favorite fonts
 
-My favirate font is [UbuntuMono-Regular](https://fonts.google.com/specimen/Ubuntu+Mono). Download the `.ttf` file and install it to `/etc/rstudio/fonts/`. It then can be selected from the global settings in RStudio Server.
+My favorite font is [UbuntuMono-Regular](https://fonts.google.com/specimen/Ubuntu+Mono). Download the `.ttf` file and install it to `/etc/rstudio/fonts/`. It then can be selected from the global settings in RStudio Server.
 
 ### Building image and push to Dockerhub.
 
@@ -70,12 +70,12 @@ Rename `lglforfun/rstudio_dev` to your own Dockerhub account and image name. And
 
 ## Starting a docker container
 
-### Expectations 
+### Expectations
 
 We expect to work on the project in the current directory of the host computer one a Rstudio docker container is started. For this purpose, the following need to be completed when starting the container:
 
-- The current directory in the host computer is copied to the container's working directory, which is `/home/rstudio/`.
-- Copy the `.ssh` keys to container's `/home/rstudio/.ssh` and `.gitconfig` to containers `/etc/gitconfig` so we can use git command at the container's terminal.
+-   The current directory in the host computer is copied to the container's working directory, which is `/home/rstudio/`.
+-   Copy the `.ssh` keys to container's `/home/rstudio/.ssh` and `.gitconfig` to containers `/etc/gitconfig` so we can use git command at the container's terminal.
 
 ### Bash script to start the container
 
@@ -123,14 +123,13 @@ else
 fi
 ```
 
-
 ## Working on a project
 
 ### RStudio Server Configuration file
 
 Ignore this step if you are happy with the default Configuration. If you have your favirate RStudio Configurations such as color, fonts, and layout, copy it to file `.config/rstudio/rstudio-prefs.json` under current directory. Here is my favirate Configurations:
 
-```text
+``` text
 {
     "jobs_tab_visibility": "shown",
     "initial_working_directory": "~",
@@ -181,7 +180,7 @@ Ignore this step if you are happy with the default Configuration. If you have yo
 }
 ```
 
-No need to manually edit this Configurations. Just start a RStudio and set up the Configurations from `Tools` --> `Global Options`. The Configuration can be found in `.config/rstudio/rstudio-prefs`. You need to copy the whole path to the directory where you want to start the RStudio container.
+No need to manually edit this Configurations. Just start a RStudio and set up the Configurations from `Tools` --\> `Global Options`. The Configuration can be found in `.config/rstudio/rstudio-prefs`. You need to copy the whole path to the directory where you want to start the RStudio container.
 
 ### Using RStudio Server in a web browser
 
