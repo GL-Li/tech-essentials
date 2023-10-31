@@ -32,6 +32,11 @@ RUN mkdir /home/rstudio/.ssh
 # install my favirate font for RStudio
 COPY ./ubuntu-fonts/UbuntuMono-Regular.ttf .
 RUN install -m644 UbuntuMono-Regular.ttf /etc/rstudio/fonts/
+
+# display git branch in RStudio Server terminal
+COPY bashrc /etc/bash.bashrc
+
+# clean up files
 RUN rm UbuntuMono-Regular.ttf install_packages_1.R install_packages_2.R
 
 EXPOSE 8787
@@ -53,6 +58,10 @@ install.packages("tidycensus")
 This may not be a good idea, but I like to be able to use `git` commands in RStudio Server's terminal and work with Github. For this purpose, the directory `/home/rstudio/.ssh/` is created. Remember never copy your `.ssh` keys to the docker image. They are only copied when the docker container is started.
 
 We also need to mount host's `$HOME/.gitconfig` to container's `/etc/gitconfig` when starting a container.
+
+### Bashrc for git terminal
+
+It is optional but if you have your favorite `bashrc` you can send it to the image and rename it as `/etc/bash.bashrc`. For RStudio Server, we want to displace git branch in the terminal so the `bashrc` has code for it.
 
 ### Favorite fonts
 
