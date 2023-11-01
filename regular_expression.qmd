@@ -1,0 +1,57 @@
+---
+title: "Regular Expression"
+editor: visual
+---
+
+Regular expression is a pain to programmers who are only occasionally users. You are most likely forgetting the rules after 3 months not using it. This document helps to better understand regular expression so that you can easily pick it up after not using it even for one year.
+
+## How regex engine matches patterns
+
+### Basic operation
+
+A match start from the leftmost of an input string and moves from left to right until the first match is found.
+
+In the example below, the match starts from `^`, the line beginning of input string `x`. As there is no match for the first letter `c` of pattern `cat`, the regex engine moves to `A`, the first letter of string `x`. Still it does match `c` so the engine keeps move left to `c` in `black` of string `x`. Now `c` matches the first letter of `c` in the pattern `cat`, the engine checks second letter in the patter, `a`. It does not match `k` after `c` in string `x` so this attempt fails. The engine now moves to `k` in the input string and tries to match the pattern `cat` all over again. The engine repeats this process until find the first match, `cat` in `catfish`, and report the match as the results. By default, the engine stops searching for additional matches.
+
+```{r}
+x <- "A black catfish for an orange cat"
+stringr::str_extract(x, "cat")
+```
+
+### Backtracking in greedy match
+
+When the search pattern contains unbounded quantifiers such as `*`, `+`, and `{3, }`, the engine tries to match as many as possible. It then tracks back to match the pattern.
+
+In the example below, the `.+` matches the whole string `x`. It then tries to match `cat` and fails. The engine now track back to a previous good match for `.+`, which is `A black catfish for an orange ca`. Still there is no match for `cat`. So the engine continuous tracks back to `A black catfish for an orange c`. This backtracking is repeated until a match is found for `cat`.
+
+```{r}
+x <- "A black catfish for an orange cat"
+stringr::str_extract(x, ".+cat")
+```
+
+### Catastrophic backtracking
+
+Catastrophic backtracking may happen when there is no match. A regex engine reports no matching only after exhausting all possibilities. So it may take a very long time to finish. In the example below, it take 1 second to finish when x has 24 `a`s, and 8 seconds when 27 `a`s.
+
+```{r}
+system.time({
+    x <- "aaaaaaaaaaaaaaaaaaaaaaaa"   # 24 a
+    stringr::str_extract(x, "(a+a+)+y")
+})
+
+system.time({
+    x <- "aaaaaaaaaaaaaaaaaaaaaaaaaaa"   # 27 a
+    stringr::str_extract(x, "(a+a+)+y")
+})
+```
+
+### Lazy match
+
+A greedy match pattern is turned into a lazy match pattern if a `?` is appended to it, like `*?`, `+?`, and `{3, }?`. The engine tries to match as few as possible.
+
+In the example below, the engine starts at `A` and tries to make a match for `.*?`. As the `.*` requires as few as 0 of any character, so the engine first match it to empty. Because of lazy match, the engine is now look to match `c` in the pattern to `A` in the string. Of course if fails. Now the engine expands `.*?` to include `A` and check `c` against space but still fails. So the engine expands `.*?` to include `A b` and repeat the process until `cat` find a match in the string. The first match `A black cat` is the return of the match.
+
+```{r}
+x <- "A black catfish for an orange cat"
+stringr::str_extract(x, ".*?cat")
+```

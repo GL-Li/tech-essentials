@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     - docker_reproducible_env.qmd
-    - summary.qmd
+    - regular_expression.qmd
     - references.qmd
 
 bibliography: references.bib
