@@ -7,6 +7,30 @@ Data science team can take advantages of Docker containers to create an reproduc
 
 This document details how to create such a R docker image, how to start a docker container from the image, and how to structure projects to conveniently use the docker container. Instead of a minimal example, we will create a fully functional docker image that can be applied to daily R projects. Basic knowledge of Docker is required to understand this document.
 
+## What is a docker container
+
+A docker container can be considered as a Linux computer dedicated for a specific task. it lives on a host Linux computer, sharing some resources of the host computer and yet provide it own independent development environment from the host.
+
+To start a docker container, we need a docker images and a protocol that runs the image to create a docker container.
+
+### Docker image
+
+A docker image contains the operating system, dependencies, packages, software, configurations etc for a specific task. It can be shared on registries like [DockerHub](%5Bhttps://hub.docker.com/%5D(#0)). Users can download the image and use the image to create reproducible environment that is the same as the other users using the image.
+
+If you intent to share the docker image, please make sure not to build sensitive data and files into the image.
+
+### Docker container
+
+A docker container is created from a docker image. During the creation of a docker container, one can mount additional files and directoris from the host computer into the container. Here a few examples:
+
+-   sending secretes such as `~/.ssh/` to container so we can connect to services using ssh from the container
+
+-   sending configuration files such `~/.gitconfig/` into the container to run git command in the container as if in the host computer.
+
+-   mounting a large data directory to the container so the programs in the container have access to the data.
+
+In brief, one can set up a container based on the settings of the host computer, which shares the other environment provided by the docker image.
+
 ## Creating a RStudio docker image
 
 ### Dockerfile
