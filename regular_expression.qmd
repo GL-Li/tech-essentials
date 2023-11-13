@@ -55,3 +55,45 @@ In the example below, the engine starts at `A` and tries to make a match for `.*
 x <- "A black catfish for an orange cat"
 stringr::str_extract(x, ".*?cat")
 ```
+
+## Capturing groups
+
+### What is capturing groups
+
+Capturing groups are used when we want the regex engine to return sub patterns in addition to the overall matching pattern. In regex pattern, a capturing group lives in a pair of round parentheses `(pattern)`.
+
+The following example has two capturing groups and three strings are returned, The first string is `123-4567890`, which is the overall matching pattern and is called group 0. The second returned string is `123`, which matches capturing group 1 `(\\d{3})`. The third is `4567890`, which matches group 2 `(\\d{7})`.
+
+```{r}
+x <- c("123-4567890", "401-7896787")
+matches <- stringr::str_match(x, "(\\d{3})-(\\d{7})")
+matches
+```
+
+```{r}
+area_code <- matches[, 2]
+area_code
+```
+
+### Named capturing groups
+
+We can give each or some capturing groups a name instead of just group 2 or 3.
+
+```{r}
+x <- "123-4567890"
+stringr::str_match(x, "(?<areaCode>\\d{3})-(?<number>\\d{7})")  # area_code not supported
+```
+
+```{r}
+# area code
+stringr::str_match(x, "(?<areaCode>\\d{3})-(?<number>\\d{7})")[, "areaCode"]
+```
+
+### Back referencing
+
+The groups 1 and 2 can be referenced as `\\1` and `\\2` in back references. In the example below we switch the order of first name and last name using back references in a search and replacement.
+
+```{r}
+x <- "Hanks, Tom"
+stringr::str_replace(x, "(\\w+),\\s(\\w+)", "\\2 \\1")
+```
