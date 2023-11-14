@@ -91,9 +91,25 @@ stringr::str_match(x, "(?<areaCode>\\d{3})-(?<number>\\d{7})")[, "areaCode"]
 
 ### Back referencing
 
-The groups 1 and 2 can be referenced as `\\1` and `\\2` in back references. In the example below we switch the order of first name and last name using back references in a search and replacement.
+The captured groups 1 and 2 can be referenced as `\\1` and `\\2` in subsequent matching patterns that point to the exact captured contents .Here are a few examples:
+
+In the example below we switch the order of first name and last name using back references in a search and replacement.
 
 ```{r}
 x <- "Hanks, Tom"
 stringr::str_replace(x, "(\\w+),\\s(\\w+)", "\\2 \\1")
+```
+
+Another use case of back referencing is to find duplicated words.
+
+```{r}
+x <- "what if if I am am wrong ong"
+stringr::str_extract_all(x, "\\b(\\w+)\\s\\1\\b")  # need word boundary 
+```
+
+And we can delete duplicated words
+
+```{r}
+x <- "what snif if if I am am wrong"
+stringr::str_replace_all(x, "\\b(\\w+)\\s\\1\\b", "\\1")
 ```
