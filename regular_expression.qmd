@@ -56,13 +56,13 @@ x <- "A black catfish for an orange cat"
 stringr::str_extract(x, ".*?cat")
 ```
 
-## Capturing groups
+## Capture groups
 
-### What is capturing groups
+### What is capture groups
 
-Capturing groups are used when we want the regex engine to return sub patterns in addition to the overall matching pattern. In regex pattern, a capturing group lives in a pair of round parentheses `(pattern)`.
+Capture groups are used when we want the regex engine to return sub patterns in addition to the overall matching pattern. In regex pattern, a capture group lives in a pair of round parentheses `(pattern)`.
 
-The following example has two capturing groups and three strings are returned, The first string is `123-4567890`, which is the overall matching pattern and is called group 0. The second returned string is `123`, which matches capturing group 1 `(\\d{3})`. The third is `4567890`, which matches group 2 `(\\d{7})`.
+The following example has two capture groups and three strings are returned, The first string is `123-4567890`, which is the overall matching pattern and is called group 0. The second returned string is `123`, which matches capture group 1 `(\\d{3})`. The third is `4567890`, which matches group 2 `(\\d{7})`.
 
 ```{r}
 x <- c("123-4567890", "401-7896787")
@@ -75,9 +75,9 @@ area_code <- matches[, 2]
 area_code
 ```
 
-### Named capturing groups
+### Named capture groups
 
-We can give each or some capturing groups a name instead of just group 2 or 3.
+We can give each or some capture groups a name instead of just group 2 or 3.
 
 ```{r}
 x <- "123-4567890"
@@ -112,4 +112,14 @@ And we can delete duplicated words
 ```{r}
 x <- "what snif if if I am am wrong"
 stringr::str_replace_all(x, "\\b(\\w+)\\s\\1\\b", "\\1")
+```
+
+### Nested capture groups
+
+A capture group can contain one or more capture groups inside it. They are ordered by the position of their open parenthesis in back reference. In the example below, `((\d{3})-(\\d{7}))` is `\\1`, `(\\d{3})` is `\\2`, and `(\\d{7})\` is`\\3`.
+
+```{r}
+# extract true number and area code and number
+x <- "Fake number is 123-4567890 and true number is 401-1234567"
+stringr::str_match(x, "true.+((\\d{3})-(\\d{7}))")
 ```
