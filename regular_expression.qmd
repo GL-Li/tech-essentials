@@ -60,9 +60,9 @@ stringr::str_extract(x, ".*?cat")
 
 ### What is capture groups
 
-Capture groups are used when we want the regex engine to return sub patterns in addition to the overall matching pattern. In regex pattern, a capture group lives in a pair of round parentheses `(pattern)`.
+Capture groups are used when we want the regex engine to return sub patterns in addition to the overall matching pattern. In regex pattern, a capturing group lives in a pair of round parentheses `(pattern)`.
 
-The following example has two capture groups and three strings are returned, The first string is `123-4567890`, which is the overall matching pattern and is called group 0. The second returned string is `123`, which matches capture group 1 `(\\d{3})`. The third is `4567890`, which matches group 2 `(\\d{7})`.
+The following example has two capture groups and three strings are returned, The first string is `123-4567890`, which is the overall matching pattern and is called group 0. The second returned string is `123`, which matches capturing group 1 `(\\d{3})`. The third is `4567890`, which matches group 2 `(\\d{7})`.
 
 ```{r}
 x <- c("123-4567890", "401-7896787")
