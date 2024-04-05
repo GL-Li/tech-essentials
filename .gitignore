@@ -1,6 +1,6 @@
 /.quarto/
 /.local/
-/.config/
+# /.config/
 /.cache/
 /_book/
 /.ssh/
