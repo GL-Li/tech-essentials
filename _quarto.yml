@@ -7,6 +7,7 @@ book:
   date: "10/15/2023"
   chapters:
     - index.qmd
+    - quarto_essentials.qmd
     - docker_reproducible_env.qmd
     - regular_expression.qmd
     - references.qmd
