@@ -45,5 +45,6 @@
     "strip_trailing_whitespace": true,
     "auto_save_on_blur": true,
     "indent_guides": "gray",
-    "editor_theme": "Cobalt"
+    "editor_theme": "Cobalt",
+    "editor_keybindings": "vim"
 }
