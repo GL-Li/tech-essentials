@@ -27,6 +27,8 @@ editor: visual
 - install flatpak
     - got to flatpak home page and follow the instructions for Debian.
     - install google chrome from flathub.org and pin it to dash.
+- install NeoVim for LunarVim
+
 
 ## set up
 
