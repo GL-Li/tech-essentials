@@ -31,6 +31,11 @@ editor: visual
   - `$ sudo apt install build-essentials`
 - install Rust and Cargo using rustup
   - something like `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+- install R, ok not the latest version
+  - $ sudo apt install r-base r-base-dev
+  - install R language server following https://github.com/REditorSupport/languageserver
+    - install Debian dependencies, copy command from above link
+    - `> install.packages("languageserver")` from R consol.
 - install NeoVim for LunarVim
     - Download NeoVim appImage
     - Move the executable `nvim.appimage` and rename it to `/usr/local/bin/nvim` (make sure /usr/local/bin/ is in `$PATH`.
@@ -48,7 +53,8 @@ editor: visual
     - install nerdfont using `getnf` https://github.com/getnf/getnf:
       - $ curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
       - $ getnf   # select JetBrainMono to install
-      - wait for a while and then start `lvim`
+      - restart computer for the nerdfont to take effect.
+
 ## set up
 
 - create ssh for github and bitbucket
@@ -64,12 +70,11 @@ editor: visual
 - connect to OneDriv and download files
   - $ docker_onedrive  # it is in ~/bin/. follow the instructions to authroize the connection
 
-- setup for vim (optional, replaced by LunarVim)
-  - $ mv ~/configuration/.vimrc_bk ~/.vimrc
+- configure LunarVim
+  - copy `config.lua` to `~/.config/lvim/`
 
-  - suppress color in `_xxx_`
-    - $ mkdir -p ~/.vim/after/syntax
-    - $ cp configurations/markdown.vim_bk .vim/after/syntax/markdown.vim
+- setup blue terminal
+  - dconf load /org/gnome/terminal/ < gnome_terminal_blue.txt
 
 ## Mount new and existing disks
 
