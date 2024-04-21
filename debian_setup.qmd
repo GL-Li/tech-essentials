@@ -60,6 +60,8 @@ editor: visual
     - `$ sudo timeshift --restore --snapshot "2023-06-17_07-34-09"` to restore to a snapshot
     - `$ sudo timeshift --delete --snapshot "2023-06-17_07-34-09"` to delete a snapshot
 
+- install pdf reader
+    - `$ sudo apt install sioyek`  which is a vim-like pdf viewer
 ## set up
 
 -   create ssh for github and bitbucket
