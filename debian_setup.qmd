@@ -21,10 +21,10 @@ editor: visual
 -   install docker engine
     -   following official instruction from docker to install docker
     -   add user xxx to docker group
-        -   \$ sudo gpasswe -a xxx docker
+        -   \$ sudo gpasswd -a xxx docker
         -   \$ newgrp docker
 -   install build-essentials
-    -   `$ sudo apt install build-essentials`
+    -   `$ sudo apt install build-essential`
 -   install Rust and Cargo using rustup
     -   something like `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
 -   install R, ok not the latest version
@@ -50,16 +50,16 @@ editor: visual
             -   \$ curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh \| bash
             -   \$ getnf \# select JetBrainMono to install
             -   restart computer for the nerdfont to take effect.
--   install timeshift for system backup
-    -   install with `$ sudo apt install timeshift`
-        -   `$ sudo timeshift --create` to create a snapshot
-        -   `$ sudo timeshift --list` to list all snapshot
-        -   `$ sudo timeshift --restore --snapshot "2023-06-17_07-34-09"` to restore to a snapshot
-        -   `$ sudo timeshift --delete --snapshot "2023-06-17_07-34-09"` to delete a snapshot
--   install password mananger
-    -   `$ sudo pat install pass` instruction https://www.passwordstore.org/
--   install pdf reader
-    -   `$ sudo apt install sioyek` which is a vim-like pdf viewer
+- install timeshift for system backup
+  - install with `$ sudo apt install timeshift`
+    - `$ sudo timeshift --create` to create a snapshot
+    - `$ sudo timeshift --list` to list all snapshot
+    - `$ sudo timeshift --restore --snapshot "2023-06-17_07-34-09"` to restore to a snapshot
+    - `$ sudo timeshift --delete --snapshot "2023-06-17_07-34-09"` to delete a snapshot
+- install password mananger
+  - `$ sudo apt install pass`  instruction https://www.passwordstore.org/
+- install pdf reader
+    - `$ sudo apt install sioyek`  which is a vim-like pdf viewer
     -   or install from flatpak. If from flatpak, the annotation database is at `/home/gl/.var/app/com.github.ahrm.sioyek/config/.local/share/Sioyek/shared.db`. Search with `$ locate shared.bd` for the exact location.
 
 ## set up
@@ -82,6 +82,6 @@ editor: visual
 
 ## Mount new and existing disks
 
-## 
+##
 
 ## Neovim and LunarVim
