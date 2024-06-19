@@ -60,6 +60,7 @@ editor: visual
   - `$ sudo apt install pass`  instruction https://www.passwordstore.org/
 - install pdf reader
     - `$ sudo apt install sioyek`  which is a vim-like pdf viewer
+      - the annotation database is in `$HOME/.local/share/sioyek/`
     -   or install from flatpak. If from flatpak, the annotation database is at `/home/gl/.var/app/com.github.ahrm.sioyek/config/.local/share/Sioyek/shared.db`. Search with `$ locate shared.bd` for the exact location.
 
 ## set up
