@@ -50,6 +50,7 @@ editor: visual
             -   \$ curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh \| bash
             -   \$ getnf \# select JetBrainMono to install
             -   restart computer for the nerdfont to take effect.
+        - copy `config.lua` into ~/.config/lvim/
 - install timeshift for system backup
   - install with `$ sudo apt install timeshift`
     - `$ sudo timeshift --create` to create a snapshot
