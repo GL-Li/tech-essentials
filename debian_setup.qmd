@@ -15,7 +15,7 @@ editor: visual
     -   `$ sudo adduser xxx sudo` \# add user xxx to sudoers
     -   \`\$ exit \# exit root user
     -   The change will take effect next time user xxx logs in or restart the computer.
--   delete the first line starting with `deb cdrom:[Debian ...` in file /etc/apt/sources.list\`/ - This line instructs `sudo apt install` to look for cdrom for packages, which block the installation when we do not have the cdrom.
+-   (may not required in latest installation) delete the first line starting with `deb cdrom:[Debian ...` in file /etc/apt/sources.list\`/ - This line instructs `sudo apt install` to look for cdrom for packages, which block the installation when we do not have the cdrom.
 -   install git with `$ sudo apt install git`
 -   install vim with `$ sudo apt install vim`
 -   install docker engine
@@ -27,30 +27,11 @@ editor: visual
     -   `$ sudo apt install build-essential`
 -   install Rust and Cargo using rustup
     -   something like `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
--   install R, ok not the latest version
-    -   \$ sudo apt install r-base r-base-dev
-    -   install R language server following https://github.com/REditorSupport/languageserver
-        -   install Debian dependencies, copy command from above link
-        -   `> install.packages("languageserver")` from R consol.
--   install NeoVim for LunarVim
+-   install rig for R installation
+    -   install pak for fast R package installtion
+-   install NeoVim
     -   Download NeoVim appImage
     -   Move the executable `nvim.appimage` and rename it to `/usr/local/bin/nvim` (make sure /usr/local/bin/ is in `$PATH`.
--   install LunarVim
-    -   install npm following instructions at https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
-        -   something like `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash` to install
-        -   install LTS version nodejs with `$ nvm install --lts`
-        -   update npm with `$ npm install -g npm`
-    -   install LunarVim following official instruction
-        -   `$ sudo apt install python3-pip`
-        -   `$ sudo apt install ripgrep`
-        -   `$ sudo apt install python3-pynvim` \# skip when install LunarVim next step
-        -   copy install command from official site. The command looks like `LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)`
-        -   add `~/.local/bin/` to \$PATH (lvim is installed here)
-        -   install nerdfont using `getnf` https://github.com/getnf/getnf:
-            -   \$ curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh \| bash
-            -   \$ getnf \# select JetBrainMono to install
-            -   restart computer for the nerdfont to take effect.
-        - copy `config.lua` into ~/.config/lvim/
 - install timeshift for system backup
   - install with `$ sudo apt install timeshift`
     - `$ sudo timeshift --create` to create a snapshot
@@ -59,10 +40,6 @@ editor: visual
     - `$ sudo timeshift --delete --snapshot "2023-06-17_07-34-09"` to delete a snapshot
 - install password mananger
   - `$ sudo apt install pass`  instruction https://www.passwordstore.org/
-- install pdf reader
-    - `$ sudo apt install sioyek`  which is a vim-like pdf viewer
-      - the annotation database is in `$HOME/.local/share/sioyek/`
-    -   or install from flatpak. If from flatpak, the annotation database is at `/home/gl/.var/app/com.github.ahrm.sioyek/config/.local/share/Sioyek/shared.db`. Search with `$ locate shared.bd` for the exact location.
 
 ## set up
 
@@ -77,8 +54,6 @@ editor: visual
     -   copy bin/ to \~/bin/
 -   connect to OneDriv and download files
     -   `$ docker_onedrive` \# it is in \~/bin/. follow the instructions to authroize the connection
--   configure LunarVim
-    -   copy `config.lua` to `~/.config/lvim/`
 -   setup blue terminal
     -   `$ dconf load /org/gnome/terminal/ < gnome_terminal_blue.txt`
 
