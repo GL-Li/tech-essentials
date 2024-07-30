@@ -16,6 +16,7 @@ editor: visual
     -   \`\$ exit \# exit root user
     -   The change will take effect next time user xxx logs in or restart the computer.
 -   (may not required in latest installation) delete the first line starting with `deb cdrom:[Debian ...` in file /etc/apt/sources.list\`/ - This line instructs `sudo apt install` to look for cdrom for packages, which block the installation when we do not have the cdrom.
+-   install autocompletion `$ sudo apt install bash-completion`
 -   install git with `$ sudo apt install git`
 -   install vim with `$ sudo apt install vim-gtk3`
     - use as normal vim but with clipboard support, copy with `"+y` and paste to other editor
